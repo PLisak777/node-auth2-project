@@ -11,7 +11,7 @@ function getUserByUsername(username) {
 }
 
 async function addNewUser(user) {
-    const is = await db('users')
+    const id = await db('users')
         .insert(user)
     const newUser = await getUserByUsername(user.username)
     return newUser
