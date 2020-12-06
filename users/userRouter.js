@@ -1,9 +1,8 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs/dist/bcrypt');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 const restricted = require('../api/restricted-middleware');
 const Users = require('./user-model');
-
-router.use('/', restricted);
 
 router.get('/users', (req, res) => {
 	Users.findBy({ department: req.user.department }, [
@@ -66,13 +65,13 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-	req.session.loggedIn = false
-	res.send('Bye Felicia')
-})
+	req.session.loggedIn = false;
+	res.send('Bye Felicia');
+});
 
 router.get('/', (req, res) => {
-	res.json({ api: 'running' }) 
-})
+	res.json({ api: 'running' });
+});
 
 module.exports = router;
 
